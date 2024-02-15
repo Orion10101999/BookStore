@@ -1,0 +1,33 @@
+.crausal-slider {
+    overflow: hidden;
+  }
+  
+  .crausal-items {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+    transform: translateX(0);
+  }
+  
+  .crausal-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .crausal-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  @media (min-width: 768px) {
+    .crausal-item {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .crausal-item {
+      flex: 0 0 33.33%;
+      max-width: 33.33%;
+    }
+  }

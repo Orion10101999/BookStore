@@ -15,20 +15,35 @@ const getBooks = async (req, resp) => {
         resp.status(500).send({ message: error.message })
     }
 }
+const getBook = async (req, resp) => {
+    try {
+        const {id} = req.params
+        const books = await Book.findById(id);
+        
+        return resp.status(200).json({
+            count: books.length,
+            data: books
+        })
+        
+    } catch (error) {
+        console.log(error.message);
+        resp.status(500).send({ message: error.message })
+    }
+}
 
 const updateBook = async (req, resp) => {
     if (
-        !request.body.title ||
-        !request.body.author ||
-        !request.body.publishYear
+        !req.body.title ||
+        !req.body.author ||
+        !req.body.publishYear
         ) {
-            return response.status(400).send({
+            return resp.status(400).send({
                 message: 'Send all required fields: title, author, publishYear',
             });
         }
         try {
             const {id} = req.params
-        const books = await Book.findByIdAndUpdate(id, request.body);
+        const books = await Book.findByIdAndUpdate(id, req.body);
         if(!books) {
             return resp.status(404).json({message : 'Book Not Found'})
         }
@@ -90,4 +105,4 @@ const postBook = async (request, response) => {
 
 
 
-export { getBooks, postBook , deleteBook , updateBook }
+export { getBooks, getBook , postBook , deleteBook , updateBook }
